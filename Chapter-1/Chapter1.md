@@ -49,3 +49,61 @@ Output:
 
 ![](.static/pipenv_ipython.png)
 
+### Directory structure
+I prefer to organize my code into modules, such an easy example create the next structure inside your project directory:
+
+```bash
+(python) tree
+.
+├── app
+│   └── app.py
+├── Pipfile
+└── Pipfile.lock
+```
+
+Or if you are super lazy copy paste this into bash:
+
+```bash
+mkdir app
+echo 'print("hello")' > app/app.py
+```
+
+In such a setup you can invoke your app like this:
+
+```bash
+(python) python -m app
+hello
+```
+
+(Assuming that you are outside of the app directory, and you are already inside the python environment)
+
+### The code
+The most simples flask example I managed to find:
+
+```python
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+```
+
+[Code is from: flask.pocoo.org](http://flask.pocoo.org/docs/1.0/quickstart/)
+
+So modify the app/app.py and then you can test your code locally:
+
+```bash
+cd app
+flask run
+```
+
+Open a new terminal and run curl:
+
+```bash
+curl 127.0.0.1:5000
+```
+
+You shall see something like this:
+![](.static/flask_run.png)
+
