@@ -56,7 +56,8 @@ I prefer to organize my code into modules, such an easy example create the next 
 (python) tree
 .
 ├── app
-│   └── app.py
+│   ├── app.py
+│   └── __init__.py
 ├── Pipfile
 └── Pipfile.lock
 ```
@@ -66,16 +67,8 @@ Or if you are super lazy copy paste this into bash:
 ```bash
 mkdir app
 echo 'print("hello")' > app/app.py
+echo 'from app.app import *' > app/__init__.py
 ```
-
-In such a setup you can invoke your app like this:
-
-```bash
-(python) python -m app
-hello
-```
-
-(Assuming that you are outside of the app directory, and you are already inside the python environment)
 
 ### The code
 The most simples flask example I managed to find:
@@ -91,10 +84,8 @@ def hello_world():
 
 [Code is from: flask.pocoo.org](http://flask.pocoo.org/docs/1.0/quickstart/)
 
-So modify the app/app.py and then you can test your code locally:
-
+So modify the app/app.py
 ```bash
-cd app
 flask run
 ```
 
@@ -106,4 +97,20 @@ curl 127.0.0.1:5000
 
 You shall see something like this:
 ![](.static/flask_run.png)
+
+As you see the warning flask itself is great for testing locally, but you will need something like a webserver to run it in production. To keep things easy go by gunicorn now.
+Install gunicorn into your python environment
+
+```bash
+pipenv install gunicorn
+```
+
+To run your app with gunicorn, just invoke it from shell after
+```bash
+gunicorn app
+```
+
+### Docker
+Now we have a simple application, time to pack it into a container.
+(as you see in the repository, I created a separated directory for this in my "working_dir")
 
