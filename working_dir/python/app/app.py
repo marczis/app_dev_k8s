@@ -5,3 +5,6 @@ application = Flask(__name__)
 def hello_world():
     return 'Hello, World!'
 
+@application.route('/test')
+def test():
+    return 'Everything works as expected.'
