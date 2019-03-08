@@ -100,3 +100,74 @@ For extra "point" - think a bit about the code, how could you return JSON?
 (hint, search json.dumps)
 
 Again, more things to consider, how to return HTTP error codes? Do some research on Flask, it can do amazing things.
+
+## Sharing your image
+So now we packed the application into a docker container, to be able to deploy it on K8s, we have to add it to a container registry, this can be private or public registry, we will use now docker hub - just to make life easy.
+
+### Prepare
+if you don't have one, go and create an account on hub.docker.com
+
+### Create a new repository
+![alt](.static/hub_create.png)
+
+See the pro tip on the side? Easy like that
+
+### Login to docker, from the CLI
+To use the new repository you have to login from the command line:
+
+```bash
+docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: marczis
+Password: 
+WARNING! Your password will be stored unencrypted in /home/marczis/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+```
+
+Read the warning - and learn about the credentials-store to be safe!
+
+### Sharing your image
+
+Let's try to push our image:
+
+```bash
+docker push marczis/app_dev_k8s:latest
+The push refers to repository [docker.io/marczis/app_dev_k8s]
+An image does not exist locally with the tag: marczis/app_dev_k8s
+```
+
+As you can see, we don't have the give tag locally - we have many options to solve it, but lets go and fix your build script, so it will generate the right tags.
+
+For now, lets create a first version from he last built image:
+
+```bash
+docker tag myapp:latest marczis/app_dev_k8s:v1
+```
+
+and now we can try to push again:
+
+```bash
+docker push marczis/app_dev_k8s:v1
+The push refers to repository [docker.io/marczis/app_dev_k8s]
+7e015a91bb5d: Pushed 
+d26e343d34a5: Pushed 
+bb839e9783c7: Pushed 
+237ce60325c6: Mounted from library/python 
+1b976700da1f: Mounted from library/python 
+bde41e1d0643: Pushed 
+7de462056991: Mounted from library/python 
+3443d6cf0f1f: Pushed 
+f3a38968d075: Mounted from library/python 
+a327787b3c73: Mounted from library/python 
+5bb0785f2eee: Mounted from library/python 
+v1: digest: sha256:a28f4cc858426e9817ce2fb4031f96420f4a37eef5eb59302670ac95006074af size: 2636
+```
+
+Much better!
+
+Now we are ready to deploy on K8s!
+
+[Proceed to Chapter 3](../Chapter-3/Chapter3.md)

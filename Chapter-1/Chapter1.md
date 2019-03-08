@@ -110,4 +110,4 @@ To run your app with gunicorn, just invoke it from shell after
 gunicorn app
 ```
 
-[Proceed to chapter two](../Chapter-2/Chapter2.md)
+[Proceed to Chapter 2](../Chapter-2/Chapter2.md)
