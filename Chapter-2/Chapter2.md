@@ -168,6 +168,12 @@ v1: digest: sha256:a28f4cc858426e9817ce2fb4031f96420f4a37eef5eb59302670ac9500607
 
 Much better!
 
+If you switch back to docker hub, you will see your new version in the tags:
+![alt](.static/hub_v1.png)
+
+It is always a nice thing to create a latest tag, which points to your latest version, go ahead a create one!
+(hint, tag & push)
+
 Now we are ready to deploy on K8s!
 
 [Proceed to Chapter 3](../Chapter-3/Chapter3.md)
