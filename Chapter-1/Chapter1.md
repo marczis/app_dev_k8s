@@ -110,7 +110,4 @@ To run your app with gunicorn, just invoke it from shell after
 gunicorn app
 ```
 
-### Docker
-Now we have a simple application, time to pack it into a container.
-(as you see in the repository, I created a separated directory for this in my "working_dir")
-
+[Proceed to chapter two](../Chapter-2/Chapter2.md)
